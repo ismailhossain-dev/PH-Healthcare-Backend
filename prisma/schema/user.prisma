@@ -1,8 +1,12 @@
 model User {
-  id                 String     @id @default(uuid())
-  name               String
-  email              String
-  password           String
+  id       String  @id @default(uuid())
+  name     String
+  email    String
+  //Password optional because when patient google login . don't nedd password
+  password String?
+  googleId String? @unique
+  authProvider AuthProvider @default(CREDENTIALS)
+
   emailVerified      Boolean    @default(false)
   role               Role       @default(PATIENT)
   status             UserStatus @default(ACTIVE)

@@ -16,6 +16,7 @@
 		"enabled": true,
 		"rules": {
 			"preset": "recommended",
+			
 			"suspicious":{
 				"noExplicitAny":"warn"
 			}, 
@@ -23,12 +24,15 @@
 				"noCommaOperator": "info"
 			},
 			"correctness": {
-				"noUnusedFunctionParameters": "off"
+				"noUnusedFunctionParameters": "off",
+				"noUnusedImports": "off"
 			},
 			"style": {
 				"noNonNullAssertion": "info",
 				"useNodejsImportProtocol": "info"
+				
 			}
+		
 		}
 	},
 	"javascript": {
