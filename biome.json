@@ -21,6 +21,13 @@
 			}, 
 			"complexity":{
 				"noCommaOperator": "info"
+			},
+			"correctness": {
+				"noUnusedFunctionParameters": "off"
+			},
+			"style": {
+				"noNonNullAssertion": "info",
+				"useNodejsImportProtocol": "info"
 			}
 		}
 	},
