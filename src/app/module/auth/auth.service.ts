@@ -88,6 +88,11 @@ const loginUser = async (payload: ILoginUserPayload) => {
     throw new Error("User is blocked");
   }
 
+  //if user email have but password not found so it is google login user
+  if(password === null && user.googleId !==null){
+    throw new Error("User Already Has Account Register With Google. Try To Login With Google.")
+  }
+
   if (user.isDeleted || user.status === UserStatus.DELETED) {
     throw new Error("User is deleted");
   }
