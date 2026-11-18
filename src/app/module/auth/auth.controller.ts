@@ -4,45 +4,19 @@ import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import type { IRequestUser } from "./auth.interface";
 import { AuthService } from "./auth.service";
-import z from "zod";
-
-const patientRegistrationZodSchema = z.object({
-  name: z
-    .string("Not A String!!!")
-    .min(3, "Name must atleast 3 character long !!"),
-  email: z.email("Not Email !!"),
-  // Zod Password validation form google
-  password: z
-    .string()
-    .min(8, "Password Must Minimum 8 Characters Long..")
-    .regex(/[A-Z]/, "Password must contain atleast 1 Uppercase Letter")
-    .regex(/[a-z]/, "Password must contain atleast 1 Lowercase Letter")
-    .regex(/[0-9]/, "Password must contain atleast 1 Number")
-    .regex(/[^A-Za-z0-9]/, "Password must contain atleast 1 Special Character"),
-
-  patient: z.object({
-    contactNumber: z.string().optional(),
-    age: z.number(),
-  }),
-});
 
 const registerPatient = catchAsync(async (req: Request, res: Response) => {
-  const payload = patientRegistrationZodSchema.safeParse(req.body);
+  // const payload = PatientValidation.patientRegistrationZodSchema.safeParse(req.body);
 
-  //Zod validation error
-  if (!payload.success) {
-    //console.log(payload.error.issues)
-    let errorMessage = "";
+  // //Zod validation error
+  // if (!payload.success) {
+  //   console.log(payload.error)
+  //   console.log(payload.error.issues)
+  //   throw new Error(payload.error.issues[0].message);
+  // }
+  const payload = req.body;
 
-    //for each teke kono kichu return hoi na ta variable rak hoi ni
-    //password validation er sob gola error eksathe pawer jonno forEach use kora hoiche
-    payload.error.issues.forEach((issue) => {
-     errorMessage = errorMessage + issue.message;
-    });
-    throw new Error(errorMessage);
-  }
-
-  const result = await AuthService.registerPatient(payload.data);
+  const result = await AuthService.registerPatient(payload);
 
   const { accessToken, refreshToken, user, patient } = result;
 
