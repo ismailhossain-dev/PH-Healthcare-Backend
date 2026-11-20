@@ -143,3 +143,4 @@ export const seedTesterDoctor = async () => {
     console.log("Error Sedning Tester Doctor : ", error);
   }
 };
+console.log("Hello world")
